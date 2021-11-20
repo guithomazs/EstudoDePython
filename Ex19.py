@@ -82,7 +82,7 @@ else:   # Inserção automática de valores
     probabilidade = [1] + [random.randint(10, 30)for i in range(Nsistemas)]   # pesos aleatórios para cada índice
     # 3 jogos a cada 10 virão díspares
     if random.randint(1, 10) > 7:
-        # o range do peso do ganhador que virá com muita vantagem
+        # o range do peso do candidato que virá com vantagem
         probabilidade[random.randint(1, Nsistemas-1)] = random.randint(30, 50)
     while digitado != 0:
         menor_opcao = 1 if Nvotos < minimo else 0
