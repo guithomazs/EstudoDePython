@@ -29,3 +29,84 @@
 # Total                    8800
 #
 # O Sistema Operacional mais votado foi o Unix, com 3500 votos, correspondendo a 40% dos votos.
+import random
+
+minimo = 8500
+sists = ['Windows Server', 'Unix', 'Linux', 'Netware', 'Mac OS', 'HP/UX', 'Solaris', 'Outro']
+Nsistemas = len(sists)
+sistemas = [0]*Nsistemas
+Nvotos = 0
+digitado = 1
+letra = 's'
+percent = [0]*Nsistemas
+maior = 0
+indice = 0
+
+print('Sistemas: ', end='')
+for i, n in enumerate(sists, 1):
+    print(i, '=', n, end=' | ')
+print()
+# resposta = input('Deseja valores automáticos?(computará 3000 valores aleatórios)')
+resposta = 'sim'
+if letra not in resposta.lower():   # Inserção manual de valores
+    digitado = input(f'Digite um valor de 1 a {Nsistemas} para votar no sistema operacional(0 para parar):')
+    while digitado != 0:
+        while type(digitado) != int:
+            try:
+                digitado = int(digitado)
+                if digitado == 0:
+                    break
+            except ValueError:
+                digitado = input('Digite um valor correto por favor!')
+                if digitado == '0':
+                    break
+
+        if not 1 <= digitado <= 6:
+            while not 1 <= digitado <= 6:
+                if digitado == 0:
+                    break
+                digitado = input(f'Intervalo deve estar entre 1 e {Nsistemas}:')
+                while type(digitado) != int:
+                    try:
+                        digitado = int(digitado)
+                    except ValueError:
+                        digitado = input('Digite um valor correto por favor!')
+        if digitado == 0:
+            break
+        sistemas[digitado - 1] += 1
+        Nvotos += 1
+        digitado = input(f'Digite um valor de 1 a {Nsistemas} para votar no sistema operacional(0 para parar):')
+    print('Encerrando')
+else:   # Inserção automática de valores
+    seletor = random.Random()
+    probabilidade = [1] + [random.randint(10, 30)for i in range(Nsistemas)]   # pesos aleatórios para cada índice
+    # 3 jogos a cada 10 virão díspares
+    if random.randint(1, 10) > 7:
+        # o range do peso do ganhador que virá com muita vantagem
+        probabilidade[random.randint(1, Nsistemas-1)] = random.randint(30, 50)
+    while digitado != 0:
+        menor_opcao = 1 if Nvotos < minimo else 0
+        digitado = seletor.choices(range(menor_opcao, Nsistemas+1), probabilidade[menor_opcao:], k=1)[0]
+        if digitado == 0:
+            break
+        sistemas[digitado - 1] += 1
+        Nvotos += 1
+if Nvotos > 0:
+    for i in range(len(sistemas)):
+        percent[i] = sistemas[i] * 100 / Nvotos
+        for j in range(len(sistemas)):
+            if sistemas[j] > sistemas[i] and sistemas[j] > maior:
+                maior = sistemas[j]
+                indice = j
+print()
+print('Foram computados', Nvotos, 'votos!')
+print('------------------------------------------------------')
+print('Sistema Operacional             votos             %')
+print('------------------------------------------------------')
+for i in range(len(sistemas)):
+    print(f'{sists[i]:<20}', end='  ')
+    print(f'{sistemas[i]:^25}', end=' ')
+    print(f'{percent[i]:.2f}%')
+print('------------------------------------------------------')
+print(f'O sistema mais votado foi o {sists[indice]} com {sistemas[indice]} votos,'
+      f' correspondendo a aproximadamente {round(percent[indice])}% dos votos! ')
