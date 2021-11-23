@@ -18,8 +18,10 @@
 import random
 qtdVendedores = 40
 salarioFixo = 200
-comissao = 0.09
-vendas_semana = [salarioFixo + random.randint(0, 11000) * comissao for i in range(qtdVendedores)]
+porcentagem = 9
+comissao = porcentagem / 100
+# comissao = 0.09
+vendas_semana = [salarioFixo + random.uniform(0, 11000) * comissao for i in range(qtdVendedores)]
 posi = [0]*9
 
 
@@ -29,9 +31,11 @@ def faixa_salarial(salario) -> int:
 
 
 for i in range(qtdVendedores):
+
     faixa = faixa_salarial(vendas_semana[i])
     posi[faixa-1] += 1
-    print(f'O vendedor {i+1} recebeu $', round(float(vendas_semana[i]), 2),
-          '- faixa salarial:', faixa_salarial(vendas_semana[i]))
+    print(f'O vendedor {i+1} recebeu R${round(float(vendas_semana[i]), 2)} '
+          f'- faixa salarial:', faixa_salarial(vendas_semana[i]))
+
 for i in range(len(posi)):
     print(f'Faixa {i+1} = {posi[i]}')

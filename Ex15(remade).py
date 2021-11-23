@@ -32,29 +32,40 @@ def m7v3(v):
 
 parar = ['-1', 'parar', 'stop', '', ' ']
 vetor = []
+
 while True:
     n = input('Digite um número(-1 para parar): ')
+
     if n.strip() in parar:
         break
+
     if n == '' or not n.isdecimal():
         print('Valor incorreto, preencha novamente!')
         continue
+
     if 0 <= float(n) <= 10:
         vetor.append(float(n))
+
     else:
         print('Fora do intervalo de 0 a 10!')
 
+
 print('Quantidade de itens lidos: ', len(vetor))
 print('Elementos em ordem: ', vetor)
+
 print('Ordem inversa: ')
 print('', '\n '.join([str(i) for i in vetor[::-1]]))
+
 print('Soma = ', sum(vetor))
+
 media = sum(vetor)/len(vetor)
 print('Média = ', media)
 menor_sete = 0
+
 for i in range(len(vetor)):
     if vetor[i] < 7:
         menor_sete += 1
+
 print('Maior que a média = ', sum([1 for i in vetor if i > media]))    # atenção depois
 print('Menor que sete = ', menor_sete)
 print('Menor que sete2 = ', len(list(filter(lambda x: x < 7, vetor))))

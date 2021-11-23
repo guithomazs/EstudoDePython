@@ -6,13 +6,17 @@ vet = []
 vetPar = []
 vetImpar = []
 qtd = 20
+
 for i in range(qtd):
-    # vet[i] = int(input(f'{i+1}- Digite um número inteiro: '))
+
     vet.append(randrange(10000))
+
     if vet[i] % 2 == 0:
         vetPar.append(vet[i])
+
     else:
         vetImpar.append(vet[i])
+
 print(vet)
 print(f'Vetor par = {vetPar}')
 print(f'Vetor Impar = {vetImpar}')

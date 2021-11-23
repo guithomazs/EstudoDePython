@@ -9,10 +9,13 @@
 # Calcule e mostre a quantidade de valores acima da média calculada;
 # Calcule e mostre a quantidade de valores abaixo de sete;
 # Encerre o programa com uma mensagem;
+
 digitados = []
 validador = True
 continuar = True
+
 parar = ['-1', 'parar', 'stop', '', ' ', -1]
+
 qtd = 0
 media = 0
 qtdMedia = 0
@@ -25,18 +28,25 @@ if digitado not in parar:
         validador = True
         while validador:
             try:
+
                 digitado = float(digitado)
                 if type(digitado) == float:
+
                     if digitado in parar:
                         break
+
                     elif 0 <= digitado <= 10:
                         digitados.append(digitado)
                         qtd += 1
+
                         if digitado < 7:
                             abaixo_sete += 1
+
                         validador = False
+
                     else:
                         digitado = input("Por favor redigite essa nota: ")
+
                         if digitado in parar:
                             break
                 else:
@@ -49,7 +59,9 @@ if digitado not in parar:
                 break
         if digitado in parar:
             break
+
         digitado = input('Digite uma nota no intervalo de 0 a 10(-1 ou "stop" para parar): ')
+
         if digitado in parar:
             continuar = False
 
